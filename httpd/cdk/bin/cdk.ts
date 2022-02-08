@@ -10,7 +10,7 @@ new CdkStack(app, 'FileServerHttpd', {
   domain: 'dliu.com',
   dnsRecord: 'files',
   appName: 'file-server-httpd',
-  instanceCount: 1,
+  instanceCount: 2,
   tags: { service: 'file-server-httpd' },
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
