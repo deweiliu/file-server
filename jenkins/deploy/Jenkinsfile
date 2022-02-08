@@ -15,28 +15,27 @@ pipeline {
             }
         }
 
-        dir('httpd'){
-            stage('CDK Synth - httpd'){
-                steps{
-                    dir('cdk'){
-                        sh '''
-                        npm install;
-                        npm run synth;
-                        '''
-                    }
+        stage('CDK Synth - httpd'){
+            steps{
+                dir('httpd/cdk'){
+                    sh '''
+                    npm install;
+                    npm run synth;
+                    '''
                 }
-            }        
-            stage('CDK Deploy - httpd'){
-                steps{
-                    dir('cdk-corrected'){
-                        sh '''
-                        npm install;
-                        npm run deploy;
-                        '''
-                    }
+            }
+        }        
+        stage('CDK Deploy - httpd'){
+            steps{
+                dir('httpd/cdk-corrected'){
+                    sh '''
+                    npm install;
+                    npm run deploy;
+                    '''
                 }
             }
         }
+
     }
     post { 
         always { 
