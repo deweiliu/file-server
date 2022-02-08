@@ -14,24 +14,26 @@ pipeline {
                 sh(script: 'aws cloudformation wait stack-update-complete --region eu-west-2 --stack-name Blog', returnStatus: true)
             }
         }
-        
-        stage('CDK Synth - httpd'){
-            steps{
-                dir('cdk'){
-                    sh '''
-                    npm install;
-                    npm run synth;
-                    '''
+
+        dir('httpd'){
+            stage('CDK Synth - httpd'){
+                steps{
+                    dir('cdk'){
+                        sh '''
+                        npm install;
+                        npm run synth;
+                        '''
+                    }
                 }
-            }
-        }        
-        stage('CDK Deploy - httpd'){
-            steps{
-                dir('cdk-corrected'){
-                    sh '''
-                    npm install;
-                    npm run deploy;
-                    '''
+            }        
+            stage('CDK Deploy - httpd'){
+                steps{
+                    dir('cdk-corrected'){
+                        sh '''
+                        npm install;
+                        npm run deploy;
+                        '''
+                    }
                 }
             }
         }
