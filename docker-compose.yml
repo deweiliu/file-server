@@ -4,7 +4,7 @@ services:
   file-server-httpd:
     image: deweiliu/file-server-httpd:latest
     build:
-      context: ./src
+      context: ./httpd/src
       dockerfile: Dockerfile
       x-bake:
         platforms:
