@@ -5,12 +5,7 @@ import { CdkStack } from '../lib/main-stack';
 
 const app = new App();
 new CdkStack(app, 'FileServerSync', {
-  maxAzs: 2,
-  appId: 14,
-  domain: 'dliu.com',
-  dnsRecord: 'files',
   appName: 'file-server-sync',
-  instanceCount: 2,
   tags: { service: 'file-server-sync' },
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,

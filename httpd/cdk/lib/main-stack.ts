@@ -32,7 +32,7 @@ export class CdkStack extends Stack {
     const fsSecurityGroup = new ec2.SecurityGroup(this, 'FsSecurityGroup', { vpc: get.vpc });
     fsSecurityGroup.connections.allowFrom(get.clusterSecurityGroup, ec2.Port.tcp(2049), `Allow traffic from ${get.appName} to the File System`);
 
-    const subnets: ec2.ISubnet[] = [];
+    const subnets: ec2.Subnet[] = [];
     [...Array(props.maxAzs).keys()].forEach(azIndex => {
       const subnet = new ec2.PublicSubnet(this, `Subnet` + azIndex, {
         vpcId: get.vpc.vpcId,
@@ -142,5 +142,13 @@ export class CdkStack extends Stack {
     });
 
     new CfnOutput(this, 'DnsName', { value: record.domainName });
+    new CfnOutput(this, 'EfsSecurityGroup', {
+      value: fsSecurityGroup.securityGroupId,
+      exportName: 'FileServer-EfsSecurityGroup'
+    });
+    new CfnOutput(this, 'EfsSubnetArn', {
+      value: subnets[0].subnetId,
+      exportName: 'FileServer-EfsSubnetId'
+    });
   }
 }
