@@ -36,6 +36,26 @@ pipeline {
             }
         }
 
+        stage('CDK Synth - sync-files'){
+            steps{
+                dir('sync-files/cdk'){
+                    sh '''
+                    npm install;
+                    npm run synth;
+                    '''
+                }
+            }
+        }        
+        stage('CDK Deploy - sync-files'){
+            steps{
+                dir('sync-files/cdk'){
+                    sh '''
+                    npm run deploy;
+                    '''
+                }
+            }
+        }
+
     }
     post { 
         always { 
