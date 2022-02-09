@@ -46,7 +46,7 @@ export class CdkStack extends Stack {
       destinationLocationArn: EfsLocation.attrLocationArn,
       name: 'file-server-s3-to-efs',
       sourceLocationArn: s3Location.attrLocationArn,
-      schedule: { scheduleExpression: '0 8 ? * * *' },
+      schedule: { scheduleExpression: 'cron(0 0/3 ? * * *)' },
       options: {
         preserveDeletedFiles: 'REMOVE',
         transferMode: 'CHANGED',
